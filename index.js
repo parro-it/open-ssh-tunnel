@@ -12,6 +12,19 @@ function openTunnel(options) {
   });
 
   return new Promise((resolve, reject) => {
+    tunnel.on('end', () => {
+      debug('ssh tunnel is disconnected.');
+    });
+
+    tunnel.on('close', hadError => {
+      if (hadError) {
+        debug('ssh tunnel is closed due to errors.');
+      } else {
+        debug('ssh tunnel is closed.');
+      }
+      tunnel.end();
+    });
+
     tunnel.on('error', err => {
       reject(err);
     });
@@ -21,6 +34,7 @@ function openTunnel(options) {
       let timedOut = false;
       const timeout = setTimeout(() => {
         timedOut = true;
+        tunnel.end();
         reject(new Error('Timed out while waiting for forwardOut'));
       }, options.forwardTimeout);
 
@@ -31,7 +45,7 @@ function openTunnel(options) {
         options.dstPort,
         (err, stream) => {
           if (timedOut) {
-            tunnel.end();
+            debug('port forward timed out.');
             return null;
           }
 
