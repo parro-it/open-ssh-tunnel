@@ -1,0 +1,31 @@
+{
+  "name": "open-ssh-tunnel",
+  "version": "0.0.1",
+  "description": "",
+  "repository": "parro-it/open-ssh-tunnel",
+  "license": "MIT",
+  "author": "parro-it",
+  "scripts": {
+    "test": "node test | faucet",
+    "debug": "DEBUG=open-ssh-tunnel node test || echo failed",
+    "lint": "eslint ."
+  },
+  "keywords": [],
+  "engines": {
+    "node": ">=5"
+  },
+  "eslintConfig": {
+    "extends": "js"
+  },
+  "devDependencies": {
+    "co": "^4.6.0",
+    "tape": "^4.2.2"
+  },
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "debug": "^2.2.0",
+    "ssh2": "^0.4.12"
+  }
+}
