@@ -1,6 +1,6 @@
 {
   "name": "open-ssh-tunnel",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Easy ssh2 tunneling",
   "repository": "parro-it/open-ssh-tunnel",
   "license": "MIT",
@@ -10,7 +10,18 @@
     "debug": "DEBUG=open-ssh-tunnel node test || echo failed",
     "lint": "eslint ."
   },
-  "keywords": ["ssh", "ssh2", "sftp", "secure", "shell", "exec", "remote", "client", "tunnel", "tcp"],
+  "keywords": [
+    "ssh",
+    "ssh2",
+    "sftp",
+    "secure",
+    "shell",
+    "exec",
+    "remote",
+    "client",
+    "tunnel",
+    "tcp"
+  ],
   "engines": {
     "node": ">=5"
   },
