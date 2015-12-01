@@ -1,6 +1,7 @@
 # open-ssh-tunnel
 
 > Easy ssh tunneling function based on [ssh2 library](https://github.com/mscdex/ssh2)
+
 > Inspired by [tunnel-ssh](https://github.com/Finanzchef24-GmbH/tunnel-ssh), but with simplified, more modern code.
 
 [![Travis Build Status](https://img.shields.io/travis/parro-it/open-ssh-tunnel.svg)](http://travis-ci.org/parro-it/open-ssh-tunnel)
