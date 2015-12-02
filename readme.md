@@ -28,7 +28,9 @@ npm install --save open-ssh-tunnel
       dstPort: 3306,
       dstAddr: '127.0.0.1',
       readyTimeout: 1000,
-      forwardTimeout: 1000
+      forwardTimeout: 1000,
+      localPort: 3306,
+      localAddr: '127.0.0.1'
     });
 
     // you can now connect to your
@@ -47,9 +49,11 @@ to a node net server instance if tunnel is opened, otherwise is rejected with an
 
 ### Options
 
-* __srcIP__ and __srcPort__ as the originating address and port and __dstIP__ and __dstPort__ as the remote destination address and port. This are options passed to [ssh2 `Client.forwardOut` method](https://github.com/mscdex/ssh2/blob/master/README.md#api).
+* __srcIP__ and __srcPort__ as the originating address and port and __dstIP__ and __dstPort__ as the remote destination address and port. These are options passed to [ssh2 `Client.forwardOut` method](https://github.com/mscdex/ssh2/blob/master/README.md#api).
 
 * forwardTimeout - How many millisecond to wait before reject with a timeout error.
+
+* __localIP__ and __localPort__ are the address and port of the local endpoint of the tunnel on your machine. They are passed to net server connect method.
 
 * All other options are passed to [ssh2 `Client.connect` method](https://github.com/mscdex/ssh2/blob/master/README.md#api).
 
