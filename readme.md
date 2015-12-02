@@ -57,6 +57,13 @@ to a node net server instance if tunnel is opened, otherwise is rejected with an
 
 * All other options are passed to [ssh2 `Client.connect` method](https://github.com/mscdex/ssh2/blob/master/README.md#api).
 
+
+## Related
+
+* [electron-tunnel](https://github.com/parro-it/tunnels) - Awesome Electron app to manage your ssh tunnels - powered by this module.
+
+
+
 ## License
 
 The MIT License (MIT)
