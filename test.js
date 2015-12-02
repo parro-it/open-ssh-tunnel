@@ -12,7 +12,7 @@ const config = {
   dstAddr: '127.0.0.1',
   readyTimeout: 3000,
   forwardTimeout: 3000,
-  localPort: 3306,
+  localPort: 3308,
   localAddr: '127.0.0.1'
 };
 
