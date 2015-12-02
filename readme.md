@@ -53,7 +53,7 @@ to a node net server instance if tunnel is opened, otherwise is rejected with an
 
 * forwardTimeout - How many millisecond to wait before reject with a timeout error.
 
-* __localIP__ and __localPort__ are the address and port of the local endpoint of the tunnel on your machine. They are passed to net server connect method.
+* __localAddr__ and __localPort__ are the address and port of the local endpoint of the tunnel on your machine. They are passed to net server connect method.
 
 * All other options are passed to [ssh2 `Client.connect` method](https://github.com/mscdex/ssh2/blob/master/README.md#api).
 
