@@ -10,6 +10,9 @@
     "debug": "DEBUG=open-ssh-tunnel node test || echo failed",
     "lint": "eslint ."
   },
+  "bin": {
+    "tunnel": "./cli.js"
+  },
   "keywords": [
     "ssh",
     "ssh2",
@@ -37,6 +40,7 @@
   ],
   "dependencies": {
     "debug": "^2.2.0",
-    "ssh2": "^0.4.12"
+    "ssh2": "^0.4.12",
+    "yargs": "^3.30.0"
   }
 }
