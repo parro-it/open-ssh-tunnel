@@ -11,7 +11,9 @@ const config = {
   dstPort: 3306,
   dstAddr: '127.0.0.1',
   readyTimeout: 3000,
-  forwardTimeout: 3000
+  forwardTimeout: 3000,
+  localPort: 3306,
+  localAddr: '127.0.0.1'
 };
 
 test('open an ssh forward', t => {
