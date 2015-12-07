@@ -36,7 +36,7 @@ npm install --save open-ssh-tunnel
     // you can now connect to your
     // forwarded tcp port!
 
-    // later, when you wnat to close the tunnel
+    // later, when you want to close the tunnel
     server.close();
   }
 
