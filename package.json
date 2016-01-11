@@ -33,6 +33,9 @@
   },
   "devDependencies": {
     "co": "^4.6.0",
+    "eslint": "^1.10.3",
+    "eslint-config-js": "^2.0.2",
+    "faucet": "0.0.1",
     "tape": "^4.2.2"
   },
   "files": [

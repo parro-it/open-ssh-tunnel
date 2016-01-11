@@ -74,18 +74,19 @@ function * createClientServer(options) {
   const testTunnel = yield openTunnel(options);
   testTunnel.close();
 
-  const server = net.createServer( co.wrap(function * (connection) {
-    const stream = yield openTunnel(options);
-    connection.pipe(stream).pipe(connection);
-    debug('tunnel pipeline created.');
-  }));
+  return new Promise( (resolve, reject) => {
+    const server = net.createServer( co.wrap(function * (connection) {
+      const stream = yield openTunnel(options);
+      connection.pipe(stream).pipe(connection);
+      debug('tunnel pipeline created.');
+    }));
+    server.on('error', reject);
 
-  yield new Promise(resolve => {
-    server.listen(options.localPort, options.localAddr, resolve);
+    server.listen(options.localPort, options.localAddr, () => {
+      debug('local tcp server listening.');
+      resolve(server);
+    });
   });
-
-  debug('local tcp server listening.');
-  return server;
 }
 
 
