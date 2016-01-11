@@ -7,7 +7,7 @@ const ssh = require('ssh2');
 const Server = ssh.Server;
 const fs = require('fs');
 const http = require('http');
-
+const co = require('co');
 const HOST_KEY_RSA = fs.readFileSync(__dirname + '/fixtures/ssh_host_rsa_key');
 
 const config = {
@@ -102,6 +102,19 @@ test('fails on bad port', t => {
     t.end();
   });
 });
+
+
+test('fails on local port already binded', co.wrap(function * (t) {
+  const serv = yield sshTunnel(config);
+
+  sshTunnel(config).then(() => {
+    t.fail('Exception expected');
+  }).catch(err => {
+    t.equal(err.message, 'listen EADDRINUSE 127.0.0.1:8000');
+    serv.close();
+    t.end();
+  });
+}));
 
 
 test('fails on bad host', t => {
