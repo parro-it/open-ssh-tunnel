@@ -39,7 +39,8 @@
     "tape": "^4.2.2"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "cli.js"
   ],
   "dependencies": {
     "debug": "^2.2.0",
