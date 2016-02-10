@@ -1,6 +1,6 @@
 {
   "name": "open-ssh-tunnel",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Easy ssh2 tunneling",
   "repository": "parro-it/open-ssh-tunnel",
   "license": "MIT",
