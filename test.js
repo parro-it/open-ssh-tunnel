@@ -58,8 +58,8 @@ test('start ssh test server', t => {
 test('open an ssh forward', t => {
   openTunnel(config)
     .then(tunnelStream => {
-      t.equal(typeof tunnelStream.pipe, 'function');
-      tunnelStream.close();
+      t.equal(typeof tunnelStream.end, 'function');
+      tunnelStream.end();
       t.end();
     })
     .catch(err => t.end(err));

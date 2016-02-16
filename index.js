@@ -31,57 +31,65 @@ function openTunnel(options) {
 
     tunnel.on('ready', () => {
       debug('ssh tunnel is ready.');
-      let timedOut = false;
-      const timeout = setTimeout(() => {
-        timedOut = true;
-        tunnel.end();
-        reject(new Error('Timed out while waiting for forwardOut'));
-      }, options.forwardTimeout);
-
-      tunnel.forwardOut(
-        options.srcAddr,
-        options.srcPort,
-        options.dstAddr,
-        options.dstPort,
-        (err, stream) => {
-          if (timedOut) {
-            debug('port forward timed out.');
-            return null;
-          }
-
-          clearTimeout(timeout);
-
-          if (err) {
-            tunnel.end();
-            return reject(err);
-          }
-
-          debug('port forward stream is ready.');
-          stream.on('close', () => {
-            debug('port forward stream is closed.');
-            tunnel.end();
-          });
-
-          resolve(stream);
-        }
-      );
+      resolve(tunnel);
     });
     tunnel.connect(options);
   });
 }
 
+function forwardConnection(tunnel, options) {
+  return new Promise((resolve, reject) => {
+    let timedOut = false;
+    const timeout = setTimeout(() => {
+      timedOut = true;
+      tunnel.end();
+      reject(new Error('Timed out while waiting for forwardOut'));
+    }, options.forwardTimeout);
+
+    tunnel.forwardOut(
+      options.srcAddr,
+      options.srcPort,
+      options.dstAddr,
+      options.dstPort,
+      (err, stream) => {
+        if (timedOut) {
+          debug('port forward timed out.');
+          return null;
+        }
+
+        clearTimeout(timeout);
+
+        if (err) {
+          tunnel.end();
+          return reject(err);
+        }
+
+        debug('port forward stream is ready.');
+        stream.on('close', () => {
+          debug('port forward stream is closed.');
+        });
+
+        resolve(stream);
+      }
+    );
+  });
+}
+
 function * createClientServer(options) {
-  const testTunnel = yield openTunnel(options);
-  testTunnel.close();
+  const tunnel = yield openTunnel(options);
+  yield forwardConnection(tunnel, options);
 
   return new Promise( (resolve, reject) => {
     const server = net.createServer( co.wrap(function * (connection) {
-      const stream = yield openTunnel(options);
+      const stream = yield forwardConnection(tunnel, options);
       connection.pipe(stream).pipe(connection);
       debug('tunnel pipeline created.');
     }));
-    server.on('error', reject);
-
+    server.on('error', err => {
+      reject(err);
+      tunnel.end();
+    });
+    server.on('close', () => tunnel.end());
     server.listen(options.localPort, options.localAddr, () => {
       debug('local tcp server listening.');
       resolve(server);

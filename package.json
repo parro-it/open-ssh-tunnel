@@ -26,14 +26,15 @@
     "tcp"
   ],
   "engines": {
-    "node": ">=5"
+    "node": ">=4"
   },
   "eslintConfig": {
-    "extends": "js"
+    "extends": ["js", "features"]
   },
   "devDependencies": {
     "co": "^4.6.0",
     "eslint": "^1.10.3",
+    "eslint-config-features": "^1.1.5",
     "eslint-config-js": "^2.0.2",
     "faucet": "0.0.1",
     "tape": "^4.2.2"
