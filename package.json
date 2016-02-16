@@ -1,6 +1,6 @@
 {
   "name": "open-ssh-tunnel",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Easy ssh2 tunneling",
   "repository": "parro-it/open-ssh-tunnel",
   "license": "MIT",
@@ -29,7 +29,10 @@
     "node": ">=4"
   },
   "eslintConfig": {
-    "extends": ["js", "features"]
+    "extends": [
+      "js",
+      "features"
+    ]
   },
   "devDependencies": {
     "co": "^4.6.0",
