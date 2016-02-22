@@ -35,7 +35,6 @@
     ]
   },
   "devDependencies": {
-    "co": "^4.6.0",
     "eslint": "^1.10.3",
     "eslint-config-features": "^1.1.5",
     "eslint-config-js": "^2.0.2",
@@ -47,6 +46,7 @@
     "cli.js"
   ],
   "dependencies": {
+    "co": "^4.6.0",
     "debug": "^2.2.0",
     "ssh2": "^0.4.12",
     "yargs": "^3.30.0"
