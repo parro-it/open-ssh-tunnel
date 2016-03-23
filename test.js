@@ -1,13 +1,12 @@
 'use strict';
 
-const test = require('tape');
+const test = require('tape-async');
 const sshTunnel = require('./');
 const openTunnel = sshTunnel.openTunnel;
 const ssh = require('ssh2');
 const Server = ssh.Server;
 const fs = require('fs');
 const http = require('http');
-const co = require('co');
 const HOST_KEY_RSA = fs.readFileSync(__dirname + '/fixtures/ssh_host_rsa_key');
 
 const config = {
@@ -55,80 +54,67 @@ test('start ssh test server', t => {
 
 });
 
-test('open an ssh forward', t => {
-  openTunnel(config)
-    .then(tunnelStream => {
-      t.equal(typeof tunnelStream.end, 'function');
-      tunnelStream.end();
-      t.end();
-    })
-    .catch(err => t.end(err));
+test('open an ssh forward', function * (t) {
+  const tunnelStream = yield openTunnel(config);
+  t.equal(typeof tunnelStream.end, 'function');
+  tunnelStream.end();
 });
 
 
-test('open an ssh tunnel', t => {
-  sshTunnel(config)
-    .then(server2 => {
-      t.equal(typeof server.close, 'function');
-      server2.close();
-      t.end();
-    })
-    .catch( err => t.end(err));
+test('open an ssh tunnel', function * (t) {
+  const server2 = yield sshTunnel(config);
+  t.equal(typeof server.close, 'function');
+  server2.close();
 });
 
 
-test('fails on bad password', t => {
-  sshTunnel(Object.assign({}, config, {password: 'picchio'}))
-    .then(() => {
-      t.fail('Exception expected');
-    })
-    .catch(err => {
-      t.equal(err.message, 'All configured authentication methods failed');
-      t.end();
-    });
-});
-
-
-test('fails on bad port', t => {
-  sshTunnel(Object.assign({}, config, {
-    srcPort: 12,
-    dstPort: 13,
-    localPort: 14
-  }))
-  .then(() => {
+test('fails on bad password', function * (t) {
+  try {
+    yield sshTunnel(Object.assign({}, config, {password: 'picchio'}));
     t.fail('Exception expected');
-  }).catch(err => {
+  } catch (err) {
+    t.equal(err.message, 'All configured authentication methods failed');
+  }
+});
+
+
+test('fails on bad port', function * (t) {
+  try {
+    yield sshTunnel(Object.assign({}, config, {
+      srcPort: 12,
+      dstPort: 13,
+      localPort: 14
+    }));
+    t.fail('Exception expected');
+  } catch (err) {
     t.equal(err.message, 'listen EACCES 127.0.0.1:14');
-    t.end();
-  });
+
+  }
 });
 
 
-test('fails on local port already binded', co.wrap(function * (t) {
+test('fails on local port already binded', function * (t) {
   const serv = yield sshTunnel(config);
-
-  sshTunnel(config).then(() => {
+  try {
+    yield sshTunnel(config);
     t.fail('Exception expected');
-  }).catch(err => {
+  } catch (err) {
     t.equal(err.message, 'listen EADDRINUSE 127.0.0.1:8000');
     serv.close();
-    t.end();
-  });
-}));
-
-
-test('fails on bad host', t => {
-  sshTunnel(Object.assign({}, config, {host: '192.168.234.1'}))
-  .then(() => {
-    t.fail('Exception expected');
-  }).catch(err => {
-    t.equal(err.message, 'Timed out while waiting for handshake');
-    t.end();
-  });
+  }
 });
 
-test('end server', t => {
+
+test('fails on bad host', function * (t) {
+  try {
+    yield sshTunnel(Object.assign({}, config, {host: '192.168.234.1'}));
+    t.fail('Exception expected');
+  } catch (err) {
+    t.equal(err.message, 'Timed out while waiting for handshake');
+  }
+});
+
+test('end server', () => {
   server.close();
   httpServer.close();
-  t.end();
 });
