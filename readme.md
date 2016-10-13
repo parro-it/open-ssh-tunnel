@@ -41,6 +41,36 @@ npm install --save open-ssh-tunnel
   }
 
 ```
+### Example
+
+```
+╭───────────────╮      ╭─────────────────╮      ╭─────────╮      ╭─────────╮
+│ Mongo         │      │ open-ssh-tunnel │      │ SSH     │      │ Mongo   │
+│ client        │ <--> │                 │ <--> │ server  │ <--> │ server  │
+│ 192.168.1.1   │      │ 192.168.1.2     │      │ 10.0.0.2│      │ 10.0.0.1│
+│               │      │                 │      │         │      │         │
+╰───────────────╯      ╰─────────────────╯      ╰─────────╯      ╰─────────╯
+```
+
+In scenario where you want to connect to `mongo` that runs on a remote host, you should provide the following configuration.
+
+```js
+{
+    destPort: 27017,
+    destAddr: '10.0.0.1',
+    host: '10.0.0.2',
+    port: 22,
+    localAddr: 27018,
+    localPort: '192.168.1.2',
+    srcAddr: '192.168.1.1',
+    srcPort: 27019,
+    ...
+}
+```
+
+Note that you have to provide __localAddr__ when you need to make the tunnel visible to other hosts in your LAN.
+
+__srcAddr__ and __srcPort__, when provided, should be the network address of a client host connecting to your SSH tunnel local endpoint. If you do not need them you can provide any value for the arguments.
 
 ## API
 
