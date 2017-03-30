@@ -35,9 +35,9 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^1.10.3",
+    "eslint": "^3.18.0",
     "eslint-config-features": "^1.1.5",
-    "eslint-config-js": "^2.0.2",
+    "eslint-config-js": "^5.0.0",
     "faucet": "0.0.1",
     "tape-async": "^2.0.0"
   },
@@ -48,7 +48,7 @@
   "dependencies": {
     "co": "^4.6.0",
     "debug": "^2.2.0",
-    "ssh2": "^0.4.12",
-    "yargs": "^3.30.0"
+    "ssh2": "^0.5.4",
+    "yargs": "^7.0.2"
   }
 }
