@@ -1,5 +1,7 @@
 # open-ssh-tunnel
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/parro-it/open-ssh-tunnel.svg)](https://greenkeeper.io/)
+
 > Easy ssh tunneling function based on [ssh2 library](https://github.com/mscdex/ssh2)
 
 > Inspired by [tunnel-ssh](https://github.com/Finanzchef24-GmbH/tunnel-ssh), but with simplified, more modern code.
