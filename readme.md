@@ -4,7 +4,7 @@
 
 > Inspired by [tunnel-ssh](https://github.com/Finanzchef24-GmbH/tunnel-ssh), but with simplified, more modern code.
 
-[![Travis Build Status](https://img.shields.io/travis/parro-it/open-ssh-tunnel.svg)](http://travis-ci.org/parro-it/open-ssh-tunnel)
+[![Travis Build Status](https://img.shields.io/travis/parro-it/open-ssh-tunnel/master.svg)](http://travis-ci.org/parro-it/open-ssh-tunnel)
 [![NPM module](https://img.shields.io/npm/v/open-ssh-tunnel.svg)](https://npmjs.org/package/open-ssh-tunnel)
 [![NPM downloads](https://img.shields.io/npm/dt/open-ssh-tunnel.svg)](https://npmjs.org/package/open-ssh-tunnel)
 
