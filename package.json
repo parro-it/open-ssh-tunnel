@@ -6,7 +6,7 @@
   "license": "MIT",
   "author": "parro-it",
   "scripts": {
-    "test": "eslint . && node test | faucet",
+    "test": "xo && node test | faucet",
     "debug": "DEBUG=open-ssh-tunnel node test || echo failed",
     "lint": "eslint ."
   },
@@ -28,16 +28,8 @@
   "engines": {
     "node": ">=4"
   },
-  "eslintConfig": {
-    "extends": [
-      "js",
-      "features"
-    ]
-  },
   "devDependencies": {
-    "eslint": "^3.18.0",
-    "eslint-config-features": "^1.1.5",
-    "eslint-config-js": "^5.0.0",
+    "xo": "^0.18.1",
     "faucet": "0.0.1",
     "tape-async": "^2.0.0"
   },
