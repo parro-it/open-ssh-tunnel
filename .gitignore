@@ -82,3 +82,6 @@ Temporary Items
 .Trash-*
 
 private
+
+yarn.lock
+
