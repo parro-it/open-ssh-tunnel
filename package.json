@@ -29,7 +29,7 @@
     "node": ">=4"
   },
   "devDependencies": {
-    "xo": "^0.18.1",
+    "xo": "^0.25.4",
     "faucet": "0.0.1",
     "tape-async": "^2.0.0"
   },
